@@ -43,7 +43,7 @@ d.append(doc10)
 
 T = 10
 
-q="Circling round the earth"
+q=input()
 s = ""
 l = []
 w1 = set()
