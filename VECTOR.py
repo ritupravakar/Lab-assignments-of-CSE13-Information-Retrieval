@@ -40,9 +40,7 @@ with open("doc10.txt", 'r') as myfile:
     doc10 = myfile.read()  # type: str
 d.append(doc10)
 
-
 T = 10
-
 q=input()
 s = ""
 l = []
@@ -56,68 +54,41 @@ for i in range(len(d)):
 l2=q.split();
 for i in range(len(l2)):
     w1.add(l2[i])
-
-
 w1 = list(w1)
-#print(w1)
 idf = []
 for i in range(len(w1)):
     count = 0
     for j in range(len(d)):
         if w1[i] in d[j].split():
             count += 1
-
     val = math.log2(len(d) / count)
-
     idf.append([w1[i], val])
-
-
-
 
 print(idf)
 m = []
-
 for i in range(len(d)):
     m1 = []
     for j in range(len(w1)):
         m1.append([w1[j], d[i].split().count(w1[j])])
     m.append(m1)
 
-
 max1 = -1
 m1 = []
-
 for j in range(len(w1)):
     max1 = max(max1 , q.split().count(w1[j]))
     m1.append([w1[j], q.split().count(w1[j])])
 m.append(m1)
 
-#normalized tf
-
 for i in range(len(m)):
     max1 = -1
     for j in range(len(m[i])):
-        #max1=-1;
-        #print(str(m[i][j])+"  "+str(m[i][j][1]))
         max1=max(max1,m[i][j][1])
 
 
     for j in range(len(m[i])):
-        #max1=-1;
-        #print(str(m[i][j])+"  "+str(m[i][j][1]))
         m[i][j][1]/=max1
 
-
-
-#for i in range(len(m)):
- #   k = m[i]
-  #  print(k)
-    # for j in range(len(k))
-
-#tf*idf
 for i in range(len(m)):
-
-    # print(k)
     for j in range(len(m[i])):
         t = m[i][j]
         for k in range(len(idf)):
@@ -125,7 +96,6 @@ for i in range(len(m)):
 
                 m[i][j][1] = idf[k][1] * m[i][j][1]
 
-#dot product
 wt_l=[]
 for i in range(len(m)-1):
     wt=0
@@ -144,7 +114,6 @@ for  i in range(len(m)):
     l1.append(l)
 print(l1)
 
-#cosine similarity
 cos_sim={}
 for i in range(len(wt_l)):
     cos_sim[i]=(wt_l[i]/(l1[i]*l1[len(l1)-1]))
