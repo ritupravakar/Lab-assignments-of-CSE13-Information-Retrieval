@@ -10,25 +10,15 @@ def preprocess(input_str):
     from nltk.tokenize import word_tokenize
 
 
-    # case
+    
     input_str = input_str.lower()
-    # numbers
     result = re.sub(r'\d+', '', input_str)
-    # punctuations
     input_str = input_str.translate(str.maketrans("", "", string.punctuation))
-    # space
     input_str = str(input_str.strip())
-
-    # tokenize
-    # input_str= sent_tokenize(input_str)
     input_str = word_tokenize(input_str)
-
-    # stop words removal
     stop_words = set(stopwords.words('english'))
     input_str = [i for i in input_str if not i in stop_words]
-    # print(input_str)
-
-    # stemming
+    
     s=""
     stemmer = PorterStemmer()
     for word in input_str:
@@ -83,65 +73,43 @@ with open("doc10.txt", 'r') as myfile:
     doc10 = myfile.read()  # type: str
     doc10=preprocess(doc10)
 d.append(doc10)
-
-
 T = 10
 
 relevant = [d[0], d[1], d[2], d[3], d[4],d[5],d[6],d[7],d[8],d[9]]
 rel = d[0] + d[1] + d[2] + d[3] + d[4]+d[5]+d[6]+d[7]+d[8]+d[9]
-
 words = []
 s = ""
-#with open("t1.txt", 'r') as myfile:
- #   q = myfile.read()  # type: str
-
 q=input()
 for i in range(T):
     s += d[i]
 s += q
-
 words.append(list(s.split()))
-
 words1 = list(set(list(s.split())))
 
-# print(words1)
-# q="ach"
-
-
-
-N1_W = []  # COUNT OF TERMS IN  DOCUMENTS
+N1_W = []  
 for i in range(len(words1)):
     count = 0
     for j in range(len(relevant)):
         if words1[i] in relevant[j]:
             count += 1
     N1_W.append([(words1[i]), count,((T-count+0.5)/(count+0.5))])
-
 print(N1_W)
 
 final = {}
-
 for i in range(len(d)):
     d1=set(d[i].split())
-
     d2=set(q.split())
-
     d3=list(d1&d2)
-
     res=1
     for j in range(len(d3)):
         for k in range(len(N1_W)):
             if((d3[j])==N1_W[k][0]):
                 res*=N1_W[k][2]
-
     final[i] = res
     print(res)
-
-
-
+    
 sorted_x = sorted(final.items(), key=operator.itemgetter(1),reverse=True)
-
 print(sorted_x)
-# NEW DOC = D6
+
 
 
