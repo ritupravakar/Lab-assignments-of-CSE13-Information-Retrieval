@@ -39,7 +39,7 @@ for i in range(10):
     d.append(file(str(i + 1)))
 
 T = 10
-q = "home"
+q = input("query : ")
 s = ""
 l = []
 w1 = set()
