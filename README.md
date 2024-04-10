@@ -1,4 +1,4 @@
-## Lab report for CSE13 Information Retrieval 
+## Assignments of CSE13 Information Retrieval Lab
 
 Lab Report
 
